@@ -65,8 +65,9 @@ function! s:gitlab_server_url(opts, ...) abort
     let url = remote . '/-/blob/' . commit . '/' . path
     if get(a:opts, 'line1')
       let url .= '#L' . a:opts.line1
-      if get(a:opts, 'line2')
-        let url .= '-' . a:opts.line2
+      if get(a:opts, 'line2') && get(a:opts, 'line2') != get(a:opts, 'line1')
+        " gitlab sucks... this url only works if we first request single line, than change the url!!!???
+      "   let url .= '-' . a:opts.line2
       endif
     endif
   endif
